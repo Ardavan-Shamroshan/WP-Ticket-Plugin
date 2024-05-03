@@ -14,9 +14,14 @@
  * @package TicketPlugin
  */
 
+defined('ABSPATH') || die;
+
+include 'include/TKAssets.php';
+
 class Core
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->constants();
         $this->init();
     }
@@ -24,14 +29,26 @@ class Core
     public function constants()
     {
         define('TK_BASE_FILE', __FILE__);
+
         define('TK_PATH', plugin_dir_path(TK_BASE_FILE));
         define('TK_URL', plugin_dir_url(TK_BASE_FILE));
+
+        define('TK_ADMIN_ASSETS', TK_URL . '/assets/admin');
+        define('TK_HOME_ASSETS', TK_URL . 'assets/home');
+
+        if (!function_exists('get_plugin_data')) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+
+        define('TK_VERSION', get_plugin_data(TK_BASE_FILE)['Version']);
     }
 
     public function init()
     {
         register_activation_hook(TK_BASE_FILE, [$this, 'activate']);
         register_deactivation_hook(TK_BASE_FILE, [$this, 'deactivation']);
+
+        new TKAssets();
     }
 
     public function activate()
