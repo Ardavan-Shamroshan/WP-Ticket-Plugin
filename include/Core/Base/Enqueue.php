@@ -1,10 +1,10 @@
 <?php
 
-defined('ABSPATH') || die;
+namespace Inc\Core\Base;
 
-class TKAssets
+class Enqueue
 {
-    public function __construct()
+    public function register()
     {
         add_action('wp_enqueue_scripts', [$this, 'home_assets']);
         add_action('admin_enqueue_scripts', [$this, 'admin_assets']);
@@ -18,6 +18,5 @@ class TKAssets
     public function home_assets()
     {
         wp_enqueue_style('tk-home-app', TK_HOME_ASSETS . '/css/app.css', [], TK_VERSION);
-        // wp_enqueue_script('tk-scripts', TK_HOME_ASSETS . '/css/app.css', TK_VERSION);
     }
 }

@@ -1,0 +1,21 @@
+{
+    "name": "ardavan/ticket-plugin",
+    "description": "Ticket plugin project",
+    "type": "wordpress-plugin",
+    "license": "GPL",
+    "autoload": {
+        "psr-4": {
+            "Inc\\": "./include"
+        }
+    },
+    "authors": [
+        {
+            "name": "ardavanshamroshan",
+            "email": "ardavan2000.ashr@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.4"
+    }
+}
