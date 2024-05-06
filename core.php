@@ -14,26 +14,39 @@
  * @package TicketPlugin
  */
 
+defined('ABSPATH') || die;
+
+require_once 'include/TKAssets.php';
+
 class Core
 {
+    private static $_instance = null;
+
+    public static function instance()
+    {
+        if (is_null(self::$_instance)) {
+            self::$_instance = new self();
+        }
+
+        return self::$_instance;
+    }
+
     public function __construct()
     {
         $this->constants();
-        
         $this->init();
     }
 
     public function constants()
     {
+        if (!function_exists('get_plugin_data')) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+
         define('TK_PATH', plugin_dir_path(__FILE__));
         define('TK_URL', plugin_dir_url(__FILE__));
         define('TK_ADMIN_ASSETS', TK_URL . '/assets/admin');
         define('TK_HOME_ASSETS', TK_URL . 'assets/home');
-
-        if (!function_exists('get_plugin_data')) {
-            require_once ABSPATH . 'wp-admin/includes/plugin.php';
-        }
-        
         define('TK_VERSION', get_plugin_data(__FILE__)['Version']);
     }
 
@@ -41,6 +54,8 @@ class Core
     {
         register_activation_hook(__FILE__, [$this, 'activate']);
         register_deactivation_hook(__FILE__, [$this, 'deactivation']);
+
+        new TKAssets();
     }
 
     public function activate()
@@ -54,4 +69,4 @@ class Core
     }
 }
 
-$core = new Core();
+Core::instance();
