@@ -34,6 +34,17 @@ class Core
     public function __construct()
     {
         $this->constants();
+
+        if (version_compare(PHP_VERSION, TK_MINIMUM_PHP_VERSION, '<')) {
+
+            wp_admin_notice(
+                ' افزونه تیکت پشتیبانی برای اجرای صحیح نیاز به نسخه ' . TK_MINIMUM_PHP_VERSION . ' دارد ',
+                ['type' => 'error']
+            );
+
+            return;
+        }
+
         $this->init();
     }
 
@@ -48,6 +59,7 @@ class Core
         define('TK_ADMIN_ASSETS', TK_URL . '/assets/admin');
         define('TK_HOME_ASSETS', TK_URL . 'assets/home');
         define('TK_VERSION', get_plugin_data(__FILE__)['Version']);
+        define('TK_MINIMUM_PHP_VERSION', get_plugin_data(__FILE__)['RequiresPHP']);
     }
 
     public function init()
