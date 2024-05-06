@@ -4,7 +4,7 @@ namespace Inc\Core\Base;
 
 class Enqueue
 {
-    public function register()
+    public function index()
     {
         add_action('wp_enqueue_scripts', [$this, 'home_assets']);
         add_action('admin_enqueue_scripts', [$this, 'admin_assets']);

@@ -14,8 +14,6 @@
  * @package TicketPlugin
  */
 
-use Inc\TKAssets;
-
 // Die if accessed externally
 defined('ABSPATH') || die;
 

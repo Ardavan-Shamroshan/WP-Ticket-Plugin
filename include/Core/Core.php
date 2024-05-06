@@ -10,8 +10,8 @@ final class Core
         foreach (self::get_services() as $class) {
             $service = self::instance($class);
 
-            if (method_exists($service, 'register')) {
-                $service->register();
+            if (method_exists($service, 'index')) {
+                $service->index();
             }
         }
     }
