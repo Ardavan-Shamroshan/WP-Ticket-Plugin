@@ -1,5 +1,7 @@
 <?php
 
+defined('ABSPATH') || die;
+
 class TKAssets
 {
     public function __construct()

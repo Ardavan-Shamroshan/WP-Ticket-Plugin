@@ -17,6 +17,7 @@
 defined('ABSPATH') || die;
 
 require_once 'include/TKAssets.php';
+require_once 'include/TKDB.php';
 
 class Core
 {
@@ -65,14 +66,14 @@ class Core
     public function init()
     {
         register_activation_hook(__FILE__, [$this, 'activate']);
-        register_deactivation_hook(__FILE__, [$this, 'deactivation']);
+        register_deactivation_hook(__FILE__, [$this, 'deactivate']);
 
         new TKAssets();
     }
 
     public function activate()
     {
-        //
+        (new TKDB())->create_tables();
     }
 
     public function deactivate()
