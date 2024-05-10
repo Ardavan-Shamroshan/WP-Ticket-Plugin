@@ -1,0 +1,14 @@
+{
+    "name": "ardavan/ticket-plugin",
+    "type": "wordpress-plugin",
+    "autoload": {
+        "classmap": ["include/"]
+    },
+    "authors": [
+        {
+            "name": "ardavanshamroshan",
+            "email": "ardavan2000.ashr@gmail.com"
+        }
+    ],
+    "require": {}
+}

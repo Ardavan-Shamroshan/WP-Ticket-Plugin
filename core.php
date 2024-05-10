@@ -16,11 +16,6 @@
 
 defined('ABSPATH') || die;
 
-require_once 'include/TKAssets.php';
-require_once 'include/TKDB.php';
-require_once 'include/Admin/Abstract/BaseMenu.php';
-require_once 'include/Admin/TKMenu.php';
-
 class Core
 {
     private static $_instance = null;
@@ -67,6 +62,8 @@ class Core
 
     public function init()
     {
+        require_once TK_PATH . '/vendor/autoload.php';
+
         register_activation_hook(__FILE__, [$this, 'activate']);
         register_deactivation_hook(__FILE__, [$this, 'deactivate']);
 
