@@ -38,10 +38,15 @@ abstract class BaseMenu
                     $submenu['menu_title'],
                     $this->capability,
                     $submenu['menu_slug'],
-                    [$this, $submenu['callback']]
+                    [$this, $submenu['callback'] ?? '']
                 );
             }
         }
+
+        remove_submenu_page(
+            $this->menu_slug,
+            $this->menu_slug
+        );
     }
 
     abstract public function page();

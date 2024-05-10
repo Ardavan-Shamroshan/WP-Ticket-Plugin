@@ -33,17 +33,11 @@ class Core
     {
         $this->constants();
 
-        if (version_compare(PHP_VERSION, TK_MINIMUM_PHP_VERSION, '<')) {
-
-            wp_admin_notice(
-                ' افزونه تیکت پشتیبانی برای اجرای صحیح نیاز به نسخه ' . TK_MINIMUM_PHP_VERSION . ' دارد ',
-                ['type' => 'error']
-            );
-
-            return;
-        }
+        $this->check_version();
 
         $this->init();
+
+        $this->providers();
     }
 
     public function constants()
@@ -63,15 +57,11 @@ class Core
     public function init()
     {
         require_once TK_PATH . '/vendor/autoload.php';
+        require_once TK_PATH . '/include/Admin/Codestar/codestar-framework.php';
+        require_once TK_PATH . '/include/Admin/TKSettings.php';
 
         register_activation_hook(__FILE__, [$this, 'activate']);
         register_deactivation_hook(__FILE__, [$this, 'deactivate']);
-
-        new TKAssets();
-
-        if(is_admin()) {
-            new TKMenu();
-        }
     }
 
     public function activate()
@@ -82,6 +72,28 @@ class Core
     public function deactivate()
     {
         //
+    }
+
+    public function providers()
+    {
+        new TKAssets();
+
+        if (is_admin()) {
+            new TKMenu();
+        }
+    }
+
+    public function check_version()
+    {
+        if (version_compare(PHP_VERSION, TK_MINIMUM_PHP_VERSION, '<')) {
+
+            wp_admin_notice(
+                ' افزونه تیکت پشتیبانی برای اجرای صحیح نیاز به نسخه ' . TK_MINIMUM_PHP_VERSION . ' دارد ',
+                ['type' => 'error']
+            );
+
+            return;
+        }
     }
 }
 
