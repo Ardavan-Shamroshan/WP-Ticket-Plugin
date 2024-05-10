@@ -18,6 +18,8 @@ defined('ABSPATH') || die;
 
 require_once 'include/TKAssets.php';
 require_once 'include/TKDB.php';
+require_once 'include/Admin/Abstract/BaseMenu.php';
+require_once 'include/Admin/TKMenu.php';
 
 class Core
 {
@@ -69,6 +71,10 @@ class Core
         register_deactivation_hook(__FILE__, [$this, 'deactivate']);
 
         new TKAssets();
+
+        if(is_admin()) {
+            new TKMenu();
+        }
     }
 
     public function activate()
